@@ -1,0 +1,689 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Base keyframe animations */
+@keyframes Scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px #9409d5; }
+  50% { box-shadow: 0 0 30px #9c06d7; }
+}
+
+@keyframes spinDisc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+.musicList::-webkit-scrollbar { /*-webkit-scrollbar -  CSS pseudo-element that helps us to customize scroll bar */
+  width: 5px;
+}
+
+.musicList::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+.musicList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Common element behaviors */
+.songName {
+  display: inline-block;
+  white-space: nowrap;
+  animation: Scroll 10s linear infinite;
+}
+
+.activeSong {
+  box-shadow: 0px 0px 10px rgba(8, 210, 92, 0.999);
+  animation: glow 2s ease-in-out infinite;
+}
+
+#shuffle-button.ShuffleStart,
+#repeat-button.repeatStart{
+  color:rgba(8, 210, 92, 0.999);
+}
+#playlist {
+  color: rgba(8, 210, 92, 0.999);
+}
+
+.defaultImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Standardized Input Progress Slider */
+#progressBar_ {
+  width: 100%;
+  height: 4px;
+  accent-color: rgba(8, 210, 92, 0.999);
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+#progressBar_::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  background: rgba(8, 210, 92, 0.999);
+  border-radius: 50%;
+}
+
+/* Base Layout Wrapper */
+.screenSize {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 85px 12px 140px 12px;
+  background-color: #111;
+}
+
+/* Navigation Bar */
+.navbar {
+  width: 95%;
+  max-width: 1200px;
+  height: 60px;
+  background-color: #121212;
+  box-shadow: inset 2px 2px 8px 1px #9409d5;
+  position: fixed;
+  top: 10px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 100;
+}
+
+.logo {
+  background-image: url('LOGO.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 90px;
+  height: 40px;
+}
+
+.searchBox {
+  width: 180px;
+  height: 36px;
+  background-color: #181818;
+  border: 1px solid #444;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+}
+
+#searchText {
+  width: 100%;
+  height: 100%;
+  color:  rgb(208, 208, 205);
+  background: transparent;
+  border: none;
+  font-size: clamp(0.8rem , 1.2vh , 10rem);
+  outline: none;
+}
+#searchText::placeholder {
+  color: rgb(163, 167, 167);
+}
+#search-button {
+  font-size: 18px;
+  color: azure;
+  cursor: pointer;
+}
+#add-file {
+  font-size: 40px;
+  color: rgba(231, 233, 233, 0.983);
+  cursor: pointer;
+}
+/* Main Content Container (Hero Box) */
+.heroHeader {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heroHeaderName,
+.heroHeaderSlider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slides-text {
+  color: #fff;
+  font-size: 18px;
+}
+
+.heroContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.addSongDiv{
+  width:150px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap:calc(2rem,10vw,10rem);
+}
+.addSongText{
+  color:rgba(240, 255, 255, 0.651);
+  font-size: clamp(0.8rem, 1vh , 5rem);
+}
+
+.musicBox-list {
+  width: 100%;
+  min-height: 50px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(234, 234, 206);
+  font-size: 13px;
+  background-color: rgb(20, 20, 20);
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.musicBox-list:hover {
+  background-color: rgba(209, 12, 130, 0.207);
+}
+
+.musicImage {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0px 0px 4px rgba(172, 18, 255, 0.925);
+}
+
+.musicBox-info {
+  flex: 1;
+  font-size: 14px;
+  color: aliceblue;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.musicBox-info p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================
+   NOW PLAYING / ROTATING DISC SHOWCASE
+   ========================================== */
+.rightSideContainer {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(27, 30, 34);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.now-playing-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  height:100%;
+   position: relative;
+  overflow: hidden;
+}
+.now-playing-Video{
+   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.disc-wrapper {
+  position: relative;
+  width: clamp(160px, 8vw, 200px);
+  height: clamp(160px, 8vw, 200px);
+  border-radius: 50%;
+  background: #111;
+  box-shadow: 4px 2px 10px 2px inset  rgba(200, 13, 125, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  margin-top:15px;
+  opacity:0.8;
+}
+
+.disc {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index:1;
+}
+
+.disc-cover {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  object-fit: cover;
+  /* border: 3px solid #0e0d0e; */
+  box-shadow: 0 0 8px rgba(74, 0, 203, 0.8);
+}
+
+/* Active Spinning state controlled by JSX */
+.disc-wrapper.playing {
+  animation: spinDisc 10s linear infinite;
+}
+
+.song-display-details {
+  text-align: center;
+  color: azure;
+  width: 100%;
+  max-width: 300px;
+  z-index:1;
+}
+
+.now-playing-title {
+  margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================
+   FLOATING AUDIO PLAYER
+   ========================================== */
+.player {
+  width: 92%;
+  max-width: calc(100vw - 140px);
+  height: 110px;
+  border: 2px double rgba(12, 18, 20, 0.829);
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 20px;
+  background-color: rgb(40, 44, 52);
+  z-index: 1000;
+}
+
+.musicInfo {
+  width: 100%;
+  height: 22px;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ProgressTimeBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timeStamp {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time {
+  font-size: 11px;
+  color: azure;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 15vw, 20rem);
+  width: 100%;
+}
+
+#deleteIcon, 
+#shuffle-button, 
+#repeat-button, 
+#backward-button, 
+#play-button, 
+#forward-button {
+  color: azure;
+  font-size: 20px;
+  transition: color 0.1s ease, transform 0.1s ease;
+}
+@media (hover: hover) and (pointer: fine){
+#deleteIcon:hover, 
+#shuffle-button:hover, 
+#repeat-button:hover, 
+#backward-button:hover, 
+#play-button:hover, 
+#forward-button:hover {
+  color: rgba(8, 210, 92, 0.999);
+  transform: scale(1.1);
+}
+}
+#play-button {
+  font-size: 26px;
+}
+@media(min-width:0px) and (max-width:299px){
+  .rightSideContainer{
+    display:none;
+  }
+  .heroBox {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    height: calc(100dvh - 220px);
+    border: 2px double rgba(12, 18, 20, 0.829);
+    border-radius: 20px;
+    background-color: rgb(37, 37, 37);
+    min-height: 0;  
+    align-items: stretch;
+    padding: 15px;
+  }
+  .musicList {
+    width: 100%;
+    flex: 1;
+    max-height:calc(100% - 40px);
+    background-color: rgb(24, 24, 24);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    padding: 10px;
+    gap: 8px;
+  }
+ .player {
+    max-width: 1000px;
+  }
+   }
+   @media (min-width: 300px) and (max-width: 759px) {
+    .logo {
+      width:120px;
+      height:80px;
+    }
+  .rightSideContainer{
+    display:none;
+  }
+  .heroBox {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    height: calc(100dvh - 220px);
+    border: 2px double rgba(12, 18, 20, 0.829);
+    border-radius: 20px;
+    background-color: rgb(37, 37, 37);
+    min-height: 0;  
+    align-items: stretch;
+    padding: 15px;
+  }
+  .musicList {
+    width: 100%;
+    flex: 1;
+    max-height:calc(100% - 40px);
+    background-color: rgb(24, 24, 24);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    padding: 10px;
+    gap: 8px;
+  }
+ .player {
+    max-width: 1000px;
+  }
+  .addSongText{
+    display:none;
+  }
+
+   }
+
+@media (min-width: 760px) and (max-width: 1024px) {
+  .heroBox {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    height: calc(100dvh - 220px);
+    border: 2px double rgba(12, 18, 20, 0.829);
+    border-radius: 20px;
+    background-color: rgb(37, 37, 37);
+    min-height: 0;  
+    align-items: stretch;
+    padding: 15px;
+  }
+
+  .heroContent {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .musicList {
+    width: 100%;
+    flex: 1;
+    min-height: 200px;
+    background-color: rgb(24, 24, 24);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    padding: 5px;
+    gap: 8px;
+  }
+
+  .musicBox-list {
+    min-height: auto;
+    padding: 10px 16px;
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  .slides-text {
+    font-size: clamp(0.9rem, 2.5vh, 1.2rem);
+  }
+
+  #icons, #playlist {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .searchBox {
+    width: clamp(6rem, 30vw, 15rem);
+  }
+
+  .controls {
+    gap: clamp(1rem, 8vw, 6rem);
+  }
+
+  #add-file {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+  }
+
+  #deleteIcon {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+  }
+
+  #shuffle-button, #repeat-button, #backward-button, #forward-button {
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+  }
+  .player {
+    max-width: 1000px;
+  }
+}
+
+/* ==========================================
+   DESKTOP (1025px and up)
+   ========================================== */
+@media (min-width: 1025px) {
+  .screenSize {
+    padding-top: 95px;
+    padding-bottom: 130px;
+  }
+
+  .logo {
+    width: 140px;
+    height: 45px;
+  }
+
+  .searchBox {
+    width: 320px;
+    height: 42px;
+  }
+
+  .heroBox {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 140px);
+    max-width: 1200px;
+    height: calc(100vh - 220px);
+    border: 2px double rgba(12, 18, 20, 0.829);
+    border-radius: 20px;
+    background-color: rgb(42, 41, 41);
+    align-items: center;
+    padding: 15px;
+  }
+
+  .heroContent {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .musicList {
+    flex: 1;
+    min-width: 0;
+    height: calc(100vh - 320px);
+    background-color: rgb(27, 30, 34);
+    border-radius: 16px;
+    padding: 16px;
+    overflow-y: auto;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  .musicBox-list {
+    min-height: auto;
+    padding: 10px 16px;
+    font-size: 11px;
+    margin-bottom: 5px;
+  }
+  .rightSideContainer {
+    flex: 1;
+    min-width: 0;
+    height: clamp(100vh - 320px);
+    background-color: rgb(27, 30, 34);
+    border-radius: 16px;
+    padding: 16px;
+    overflow: hidden;
+    margin-top: 0;
+  }
+   #add-file {
+    transition: transform 0.3s ease; 
+    cursor: pointer;
+    display:block;
+  }
+  #add-file:hover {
+transform: scale(1.25);
+  }
+  .addSongText{
+    cursor: pointer;
+  }
+
+  .player {
+    width: 90%;
+    max-width: 1100px;
+    height: 95px;
+    padding: 10px 30px;
+  }
+
+  .controls {
+    gap: 80px;
+  }
+  #deleteIcon, 
+#shuffle-button, 
+#repeat-button, 
+#backward-button, 
+#play-button, 
+#forward-button {
+  cursor:pointer;
+}
+
+}
+
+/* ==========================================
+   LARGE DESKTOPS / 4K (1441px and up)
+   ========================================== */
+@media (min-width: 1441px) {
+  .heroBox {
+    max-width: 1200px;
+    min-height: 520px;
+  }
+
+  .heroContent {
+    height: 450px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .player {
+    max-width: 1300px;
+  }
+  .addSongText{
+    cursor: pointer;
+  }
+}
