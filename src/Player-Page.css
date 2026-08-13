@@ -410,6 +410,7 @@ body {
 #play-button {
   font-size: 26px;
 }
+
 @media(min-width:0px) and (max-width:299px){
   .rightSideContainer{
     display:none;
@@ -637,9 +638,10 @@ transform: scale(1.25);
 
   .player {
     width: 90%;
-    max-width: 1000px;
+    max-width: 1200px;
     height: 95px;
     padding: 10px 30px;
+     box-sizing: border-box;
   }
 
   .controls {
