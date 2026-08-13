@@ -18,17 +18,7 @@ export default function PlayerPage() {
   const [shuffleIndex, setShuffleIndex] = useState(false);
   const [repeatIndex, setRepeatIndex] = useState(false);
   const [search, setSearch] = useState("");
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
   const audioRef = useRef(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1024);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const filteredFiles = files.filter((item) =>
     item.file.name.toLowerCase().includes(search.toLowerCase())
@@ -299,7 +289,7 @@ export default function PlayerPage() {
               max="100"
               value={progress}
               onChange={handleSeek}
-              id="progressBar1"
+              id="progressBar_"
             />
             <div className="timeStamp">
               <span className="time">{timeChange(currentTime)}</span>
