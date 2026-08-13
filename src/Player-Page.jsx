@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { parseBlob } from "music-metadata-browser";
 import { useState, useRef, useEffect } from "react";
 import "./Player-Page.css";
