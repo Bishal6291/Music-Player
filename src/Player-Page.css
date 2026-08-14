@@ -670,7 +670,7 @@ transform: scale(1.25);
   }
 
   .player {
-    max-width: 1300px;
+    max-width: 1200px;
   }
   .addSongText{
     cursor: pointer;
