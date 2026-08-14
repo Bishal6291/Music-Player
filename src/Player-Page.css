@@ -184,7 +184,6 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-   gap: clamp(2rem, 10vw, 10rem);
 }
 .addSongText{
   color:rgba(240, 255, 255, 0.651);
